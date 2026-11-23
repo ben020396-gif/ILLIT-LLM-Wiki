@@ -1,0 +1,429 @@
+
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ILLIT POLICE DEPARTMENT</title>
+<style>
+*{box-sizing:border-box}
+:root{
+  --navy:#14294a;
+  --blue:#263f66;
+  --red:#bd2939;
+  --paper:#f1eee5;
+  --ink:#252b35;
+  --white:#fff;
+}
+body{
+  margin:0;
+  background:#d9dce1;
+  color:var(--ink);
+  font-family:Arial,"Noto Sans TC",sans-serif;
+}
+header{
+  background:var(--navy);
+  color:white;
+  padding:18px 7%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  border-bottom:5px solid var(--red);
+}
+.brand{
+  font-size:19px;
+  font-weight:900;
+  letter-spacing:2px;
+}
+.header-tag{
+  font-size:11px;
+  letter-spacing:2px;
+  color:#d9dce7;
+}
+main{
+  max-width:1000px;
+  margin:35px auto;
+  padding:15px;
+}
+.topline{
+  display:flex;
+  justify-content:space-between;
+  color:var(--navy);
+  font-size:12px;
+  font-weight:bold;
+  letter-spacing:2px;
+  margin-bottom:10px;
+}
+#progress{
+  height:6px;
+  background:#c5c9d0;
+  margin-bottom:20px;
+}
+#bar{
+  height:100%;
+  width:0;
+  background:var(--red);
+  transition:.3s;
+}
+.slide{
+  display:none;
+  min-height:540px;
+  padding:55px;
+  background:var(--paper);
+  border:1px solid #c9c5ba;
+  box-shadow:0 12px 30px #18243b25;
+  position:relative;
+  overflow:hidden;
+  animation:appear .3s;
+}
+.slide.active{display:block}
+@keyframes appear{
+  from{opacity:.3;transform:translateY(8px)}
+  to{opacity:1;transform:translateY(0)}
+}
+.slide:after{
+  content:"";
+  position:absolute;
+  right:-65px;
+  bottom:-65px;
+  width:190px;
+  height:190px;
+  border:18px solid #14294a0b;
+  border-radius:50%;
+}
+h1{
+  font-size:clamp(40px,8vw,76px);
+  color:var(--navy);
+  line-height:1.05;
+  margin:25px 0 12px;
+  letter-spacing:-2px;
+}
+h2{
+  color:var(--navy);
+  font-size:30px;
+  border-left:7px solid var(--red);
+  padding-left:15px;
+  margin:15px 0 25px;
+}
+h3{color:var(--red)}
+p,li{
+  font-size:16px;
+  line-height:1.9;
+}
+.label{
+  display:inline-block;
+  background:var(--red);
+  color:white;
+  padding:7px 13px;
+  font-size:12px;
+  font-weight:bold;
+  letter-spacing:2px;
+}
+.stamp{
+  display:inline-block;
+  color:var(--red);
+  border:3px solid var(--red);
+  padding:8px 13px;
+  font-weight:900;
+  letter-spacing:2px;
+  transform:rotate(-5deg);
+}
+.meta{
+  color:#707987;
+  font-size:12px;
+  letter-spacing:2px;
+  margin-top:12px;
+}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(145px,1fr));
+  gap:13px;
+  margin-top:25px;
+}
+.card{
+  background:white;
+  padding:20px;
+  border-top:4px solid var(--navy);
+  box-shadow:0 3px 10px #18243b12;
+}
+.card strong{
+  display:block;
+  color:var(--navy);
+  font-size:18px;
+  margin-bottom:8px;
+}
+.card small{color:#777}
+.member{
+  text-align:center;
+  background:white;
+  padding:25px 10px;
+  border:1px solid #d7d4ca;
+  border-bottom:4px solid var(--red);
+}
+.member strong{
+  display:block;
+  font-size:19px;
+  color:var(--navy);
+  margin-bottom:8px;
+}
+.member span{font-size:14px;color:#777}
+.record{
+  background:white;
+  padding:17px 20px;
+  margin:12px 0;
+  border-left:5px solid var(--navy);
+}
+.record strong{color:var(--navy)}
+.record p{margin:5px 0}
+.warning{
+  background:#f5dfe0;
+  border-left:5px solid var(--red);
+  padding:15px 18px;
+  margin-top:20px;
+}
+.file-number{
+  color:var(--red);
+  font-size:12px;
+  font-weight:bold;
+  letter-spacing:2px;
+}
+a{color:var(--red);font-weight:bold}
+.controls{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:18px;
+  margin:25px 0;
+}
+button{
+  border:0;
+  background:var(--navy);
+  color:white;
+  padding:13px 25px;
+  cursor:pointer;
+  font-size:14px;
+  font-weight:bold;
+  letter-spacing:1px;
+}
+button:hover{background:var(--red)}
+button:disabled{opacity:.35;cursor:not-allowed}
+#counter{
+  font-weight:bold;
+  color:var(--navy);
+  font-size:14px;
+}
+footer{
+  background:var(--navy);
+  color:#d9dce7;
+  text-align:center;
+  padding:20px;
+  font-size:11px;
+  letter-spacing:2px;
+}
+@media(max-width:600px){
+  header{padding:15px}
+  .header-tag{font-size:9px}
+  main{margin:12px auto;padding:10px}
+  .slide{padding:28px 22px;min-height:590px}
+  h2{font-size:25px}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">ILLIT POLICE DEPT.</div>
+  <div class="header-tag">OFFICIAL ARCHIVE / 2026</div>
+</header>
+
+<main>
+  <div class="topline">
+    <span>ILLIT CASE FILE</span>
+    <span>CLASSIFIED ARCHIVE</span>
+  </div>
+  <div id="progress"><div id="bar"></div></div>
+
+  <section class="slide active">
+    <span class="label">SPECIAL INVESTIGATION UNIT</span>
+    <h1>ILLIT<br>POLICE<br>DEPARTMENT</h1>
+    <h2>ILLIT 認識入門檔案</h2>
+    <p>歡迎加入 ILLIT 特別調查小組。</p>
+    <p>本次任務：調查團體背景、成員資料與音樂作品。</p>
+    <div class="stamp">CASE OPEN</div>
+    <div class="meta">CASE NO. 001 / BEGINNER GUIDE</div>
+  </section>
+
+  <section class="slide">
+    <div class="file-number">FILE 001 / GROUP INFORMATION</div>
+    <h2>團體基本資料</h2>
+    <p>首先，讓我們調查本次檔案的主要對象：ILLIT。</p>
+    <div class="grid">
+      <div class="card"><strong>ILLIT</strong><small>團體名稱</small></div>
+      <div class="card"><strong>BELIFT LAB</strong><small>所屬公司</small></div>
+      <div class="card"><strong>2024.03.25</strong><small>出道日期</small></div>
+      <div class="card"><strong>Magnetic</strong><small>出道主打歌</small></div>
+    </div>
+    <div class="warning">
+      <strong>調查摘要</strong>
+      <p>ILLIT（아일릿）是由 BELIFT LAB 推出的韓國女子團體。</p>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="file-number">FILE 002 / MEMBER RECORDS</div>
+    <h2>五位成員檔案</h2>
+    <p>以下是本次調查的五位成員名單。</p>
+    <div class="grid">
+      <div class="member"><strong>YUNAH</strong><span>윤아</span></div>
+      <div class="member"><strong>MINJU</strong><span>민주</span></div>
+      <div class="member"><strong>MOKA</strong><span>모카</span></div>
+      <div class="member"><strong>WONHEE</strong><span>원희</span></div>
+      <div class="member"><strong>IROHA</strong><span>이로하</span></div>
+    </div>
+    <div class="warning">
+      <strong>PERSONNEL RECORD</strong>
+      <p>五位成員共同組成 ILLIT。更多成員資訊可查看 Wiki 的 members.md。</p>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="file-number">FILE 003 / DEBUT INVESTIGATION</div>
+    <h2>出道背景調查</h2>
+    <div class="record">
+      <strong>調查項目 A｜團體組成</strong>
+      <p>ILLIT 是透過選秀節目《R U Next?》組成的女子團體。</p>
+    </div>
+    <div class="record">
+      <strong>調查項目 B｜正式出道</strong>
+      <p>2024 年 3 月 25 日，發行首張迷你專輯《SUPER REAL ME》。</p>
+    </div>
+    <div class="record">
+      <strong>調查項目 C｜出道歌曲</strong>
+      <p>主打歌曲為 Magnetic。</p>
+    </div>
+    <div class="stamp">CASE REPORT</div>
+  </section>
+
+  <section class="slide">
+    <div class="file-number">FILE 004 / ALBUM ARCHIVE</div>
+    <h2>音樂作品紀錄</h2>
+    <p>以下依照 Wiki 整理的資料，列出迷你專輯。</p>
+    <div class="record"><strong>01 / SUPER REAL ME</strong><p>第一張迷你專輯</p></div>
+    <div class="record"><strong>02 / I'LL LIKE YOU</strong><p>第二張迷你專輯</p></div>
+    <div class="record"><strong>03 / bomb</strong><p>第三張迷你專輯</p></div>
+    <div class="record"><strong>04 / MAMIHLAPINATAPAI</strong><p>第四張迷你專輯</p></div>
+    <div class="record"><strong>05 / BREAK EVEN</strong><p>第五張迷你專輯</p></div>
+    <div class="warning">專輯詳細資訊及發行日期，請以官方作品列表再次核對。</div>
+  </section>
+
+  <section class="slide">
+    <div class="file-number">FILE 005 / SONG INVESTIGATION</div>
+    <h2>代表歌曲調查</h2>
+    <p>本次檔案整理的重點歌曲清單：</p>
+    <div class="grid">
+      <div class="card"><strong>Magnetic</strong><small>SONG 001</small></div>
+      <div class="card"><strong>Lucky Girl Syndrome</strong><small>SONG 002</small></div>
+      <div class="card"><strong>Cherish (My Love)</strong><small>SONG 003</small></div>
+      <div class="card"><strong>Tick-Tack</strong><small>SONG 004</small></div>
+      <div class="card"><strong>NOT CUTE ANYMORE</strong><small>SONG 005</small></div>
+      <div class="card"><strong>It's Me</strong><small>SONG 006</small></div>
+      <div class="card"><strong>You're Under Arrest</strong><small>SONG 007</small></div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="file-number">FILE 006 / WIKI DATABASE</div>
+    <h2>Wiki 知識庫導覽</h2>
+    <p>本次調查使用 GitHub 建立的 ILLIT LLM Wiki 作為知識庫。</p>
+    <div class="record">
+      <strong>group.md</strong>
+      <p>團體基本資料與出道背景。</p>
+    </div>
+    <div class="record">
+      <strong>members.md</strong>
+      <p>五位成員的介紹與姓名資料。</p>
+    </div>
+    <div class="record">
+      <strong>music.md</strong>
+      <p>專輯與代表歌曲整理。</p>
+    </div>
+    <div class="record">
+      <strong>sources.md</strong>
+      <p>資料來源與查證依據。</p>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="file-number">FILE 007 / SOURCE VERIFICATION</div>
+    <h2>資料來源與查證</h2>
+    <p>為了讓調查結果有依據，使用以下網站作為查證入口：</p>
+    <div class="record">
+      <strong>BELIFT LAB</strong>
+      <p><a href="https://beliftlab.com/" target="_blank">官方網站</a></p>
+    </div>
+    <div class="record">
+      <strong>ILLIT JAPAN</strong>
+      <p><a href="https://illit-official.jp/discography" target="_blank">官方作品列表</a></p>
+    </div>
+    <div class="record">
+      <strong>HYBE</strong>
+      <p><a href="https://hybecorp.com/" target="_blank">官方網站</a></p>
+    </div>
+    <div class="warning">
+      <strong>資料查核原則</strong>
+      <p>重要資訊應回到官方來源確認，若來源不足或資料有差異，應標示待確認。</p>
+    </div>
+  </section>
+
+  <section class="slide">
+    <span class="label">INVESTIGATION COMPLETED</span>
+    <h1>CASE<br>CLOSED.</h1>
+    <h2>本次調查結束</h2>
+    <p>透過 Wiki 知識庫，我們整理了 ILLIT 的團體背景、成員資料與音樂作品。</p>
+    <p>從資料蒐集、分類、查證，到製作教學簡報，完成了一次 AI 輔助知識整理流程。</p>
+    <div class="stamp">MISSION COMPLETE</div>
+    <div class="meta">THANK YOU FOR YOUR ATTENTION.</div>
+  </section>
+
+  <div class="controls">
+    <button id="prev" onclick="changeSlide(-1)">← PREVIOUS</button>
+    <span id="counter">01 / 09</span>
+    <button id="next" onclick="changeSlide(1)">NEXT →</button>
+  </div>
+</main>
+
+<footer>
+  ILLIT POLICE DEPARTMENT · SPECIAL INVESTIGATION UNIT · 2026
+</footer>
+
+<script>
+const slides = document.querySelectorAll(".slide");
+let current = 0;
+
+function showSlide(){
+  slides.forEach((slide,index)=>{
+    slide.classList.toggle("active",index===current);
+  });
+  document.getElementById("counter").textContent =
+    String(current+1).padStart(2,"0")+" / "+
+    String(slides.length).padStart(2,"0");
+  document.getElementById("bar").style.width =
+    ((current+1)/slides.length*100)+"%";
+  document.getElementById("prev").disabled = current===0;
+  document.getElementById("next").disabled = current===slides.length-1;
+}
+
+function changeSlide(step){
+  current=Math.max(0,Math.min(slides.length-1,current+step));
+  showSlide();
+}
+
+document.addEventListener("keydown",event=>{
+  if(event.key==="ArrowRight")changeSlide(1);
+  if(event.key==="ArrowLeft")changeSlide(-1);
+});
+
+showSlide();
+</script>
+</body>
+</html>
